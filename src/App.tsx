@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { TitlePrincipalStyle } from './components/elements/Title/styles';
 import Title from './components/elements/Title/Title';
 
 import LayoutPrincipal from './components/layouts/LayoutPrincipal';
@@ -21,10 +22,38 @@ const App = () => {
 	return (
 		<LayoutPrincipal>
 			<GlobalStyle />
-			<Title title='Title principal.' />
-			<Title title='Title sections.' />
-			<Title title='Title sections.' />
-			<Title title='Title sections.' />
+			<Title
+				title='General Performance Analysis'
+				isPrincipal={true}
+				width='752'
+				height='40'
+				left='28'
+				top='91'
+			/>
+			<Title
+				title='Price Evolution'
+				isPrincipal={false}
+				width='687'
+				height='40'
+				left='28'
+				top='175'
+			/>
+			<Title
+				title='Presence Share By Product'
+				isPrincipal={false}
+				width='500'
+				height='40'
+				left='915'
+				top='174'
+			/>
+			<Title
+				title='Comparative Analysis'
+				isPrincipal={false}
+				width='687'
+				height='40'
+				left='28'
+				top='660'
+			/>
 			<LineChart />
 			<PieChart />
 			<TableBeers />
