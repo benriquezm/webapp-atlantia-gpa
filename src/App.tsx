@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
+import { Provider } from 'react-redux';
+
 import { TitlePrincipalStyle } from './components/elements/Title/styles';
 import Title from './components/elements/Title/Title';
 
