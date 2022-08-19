@@ -1,5 +1,13 @@
+import { HeaderLogo, HeaderStyle } from './styles';
+
 const Header = () => {
-	return <div>Header</div>;
+	return (
+		<>
+			<HeaderStyle>
+				<HeaderLogo urlLogo='atlantia.png' />
+			</HeaderStyle>
+		</>
+	);
 };
 
 export default Header;
