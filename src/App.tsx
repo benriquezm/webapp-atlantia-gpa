@@ -1,22 +1,20 @@
-import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-const Title = styled.h1`
-	font-size: 1.5em;
-	text-align: center;
-	color: palevioletred;
-`;
-
-// Create a Wrapper component that'll render a <section> tag with some styles
-const Wrapper = styled.section`
-	padding: 4em;
-	background: papayawhip;
+const GlobalStyle = createGlobalStyle`
+	body {
+		position: relative;
+		width: 1440px;
+		height: 2500px;
+		background: #F0F6FF;
+	}
 `;
 
 const App = () => {
 	return (
-		<Wrapper>
-			<Title>Hello World!</Title>
-		</Wrapper>
+		<div>
+			<GlobalStyle />
+			<h1>Hello World!</h1>
+		</div>
 	);
 };
 
