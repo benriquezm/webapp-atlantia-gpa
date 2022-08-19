@@ -1,0 +1,12 @@
+# Top-most EditorConfig file
+root = true
+
+# Tab indentation for all files of type JSON
+[*.json]
+indent_style = tab
+indent_size = 4
+
+# Tab indentation for all files of type tsx
+[*.tsx]
+indent_style = tab
+indent_size = 4
