@@ -28,13 +28,33 @@ export const TableRowStyle = styled.div`
 
 	border: 1px solid #e9e9e9;
 `;
+interface IGetColor {
+	isNegative: boolean;
+}
 
 interface ITableRowContentProps {
 	width: string;
 	height: string;
 	order: string;
 	aligmentType?: string;
+	isNegative?: boolean;
+	isCustom: boolean;
 }
+
+const getColor = (isNegative: any, isCustom: any) => {
+	console.log('[isNegative]: ', isNegative);
+	console.log('[isCustom]: ', isCustom);
+
+	let color = '';
+	if (isNegative && isCustom) {
+		color = '#D6215B';
+	} else if (!isNegative && isCustom) {
+		color = '#23B794';
+	} else {
+		color = '#565657';
+	}
+	return color;
+};
 
 export const TableRowContent = styled.div<ITableRowContentProps>`
 	/* Cerveza description */
@@ -54,7 +74,8 @@ export const TableRowContent = styled.div<ITableRowContentProps>`
 
 	/* Gray/900 */
 
-	color: #565657;
+	/*color: #565657;*/
+	color: ${(props) => getColor(props.isNegative, props.isCustom)}};
 
 	/* Inside auto layout */
 

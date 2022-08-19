@@ -1,26 +1,63 @@
 import { TableRowContent, TableRowImgContent, TableRowImgWrapper, TableRowStyle } from './styles';
 
-const TableRow = () => {
+interface IProductProps {
+	id?: number;
+	sku: number;
+	name: string;
+	persistence: number;
+	averagePrice: number;
+	productImage: string;
+	averagePosition: number;
+}
+
+/** TODO separate method toFixed and Match.floor and convert in functions helpers */
+const TableRow = (props: IProductProps) => {
+	const { sku, name, persistence, averagePrice, productImage, averagePosition } = props;
 	return (
 		<>
 			<TableRowStyle>
 				<TableRowImgWrapper>
-					<TableRowImgContent urlLogo='cerveza.png' />
+					<TableRowImgContent urlLogo={productImage} />
 				</TableRowImgWrapper>
-				<TableRowContent width='306' height='25' order='1'>
-					Cerveza XX Ambar 325 ml
+				<TableRowContent width='306' height='25' order='1' isCustom={false}>
+					{name}
 				</TableRowContent>
-				<TableRowContent width='223' height='25' order='2' aligmentType='center'>
-					039430430493093
+				<TableRowContent
+					width='223'
+					height='25'
+					order='2'
+					aligmentType='center'
+					isCustom={false}
+				>
+					{sku}
 				</TableRowContent>
-				<TableRowContent width='223' height='25' order='3' aligmentType='center'>
-					35%
+				<TableRowContent
+					width='223'
+					height='25'
+					order='3'
+					aligmentType='center'
+					isNegative={Math.sign(persistence) === -1 ? true : false}
+					isCustom={true}
+				>
+					{`${Math.floor(persistence * 100)} %`}
 				</TableRowContent>
-				<TableRowContent width='206' height='25' order='4' aligmentType='center'>
-					$55.00
+				<TableRowContent
+					width='206'
+					height='25'
+					order='4'
+					aligmentType='center'
+					isCustom={false}
+				>
+					{`$ ${averagePrice.toFixed(2)}`}
 				</TableRowContent>
-				<TableRowContent width='206' height='25' order='5' aligmentType='center'>
-					1
+				<TableRowContent
+					width='206'
+					height='25'
+					order='5'
+					aligmentType='center'
+					isCustom={false}
+				>
+					{averagePosition}
 				</TableRowContent>
 			</TableRowStyle>
 		</>

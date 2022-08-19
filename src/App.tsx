@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { TitlePrincipalStyle } from './components/elements/Title/styles';
+
 import Title from './components/elements/Title/Title';
 
 import LayoutPrincipal from './components/layouts/LayoutPrincipal';
