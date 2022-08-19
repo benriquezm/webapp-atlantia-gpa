@@ -1,13 +1,16 @@
 import TableHeader from '../../../elements/TableHeader/TableHeader';
 import TableRow from '../../../elements/TableRow/TableRow';
+import { TableBeersStyles } from './styles';
 
 const TableBeers = () => {
 	return (
-		<div>
-			Show TableBeers.
+		<TableBeersStyles>
 			<TableHeader />
 			<TableRow />
-		</div>
+			<TableRow />
+			<TableRow />
+			<TableRow />
+		</TableBeersStyles>
 	);
 };
 
