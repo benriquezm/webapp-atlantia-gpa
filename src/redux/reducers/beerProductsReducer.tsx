@@ -4,13 +4,19 @@ import {
 	FETCH_BEERPRODUCTS_SUCCESS,
 } from '../actions/beerProductsAction';
 
-const initialState = {
+interface IInitialState {
+	loading: boolean;
+	beerProducts: [];
+	error: string;
+}
+
+const initialState: IInitialState = {
 	loading: false,
 	beerProducts: [],
 	error: '',
 };
 
-const beerProducts = (state = initialState, action: any) => {
+const beerProducts = (state: IInitialState = initialState, action: any): IInitialState => {
 	switch (action.type) {
 		case FETCH_BEERPRODUCTS_REQUEST:
 			return {
