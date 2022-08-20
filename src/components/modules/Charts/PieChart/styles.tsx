@@ -9,7 +9,8 @@ export const PieChartStyle = styled.div`
 	width: 500px;
 	height: 407px;
 	left: 915px;
-	top: 217px;
+	top: -167px;
+	/*top: 217px;*/
 
 	background: #ffffff;
 	border: 1px solid #e9e9e9;
