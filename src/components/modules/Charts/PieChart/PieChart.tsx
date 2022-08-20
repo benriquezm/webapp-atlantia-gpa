@@ -1,17 +1,43 @@
+import { useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
+import { fetchPresenceShare } from '../../../../redux/slices/presenceShare/presenceShare.slice';
+import {
+	PresenceShare,
+	PresenceShareState,
+} from '../../../../redux/slices/presenceShare/presenceShare.types';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux/redux';
 import { PieChartStyle } from './styles';
 
 const PieChart = () => {
-	const series = [44, 55, 41, 17, 15];
+	const dispatch = useAppDispatch();
+
+	const error = useAppSelector((state) => state.presenceShare.error);
+	const loading = useAppSelector((state) => state.presenceShare.loading);
+	const presenceShare = useAppSelector((state) => state.presenceShare.presenceShare);
+
+	useEffect(() => {
+		dispatch(fetchPresenceShare());
+	}, [dispatch]);
+
+	/** TODO create funtion in helper for use other components */
+	const series = presenceShare.map((item) => item.presenceShare);
+	const labels = presenceShare.map((item) => item.name);
+	/** end TODO */
 	const options = {
-		labels: ['Apple', 'Mango', 'Orange', 'Watermelon'],
+		labels: labels,
 	};
 
 	return (
-		<PieChartStyle>
-			<Chart options={options} series={series} type='pie' />
-		</PieChartStyle>
+		<>
+			{loading && <div>Cargando gráfica ...</div>}
+			{presenceShare.length >= 1 && (
+				<PieChartStyle>
+					<Chart options={options} series={series} type='pie' />
+				</PieChartStyle>
+			)}
+			{error !== '' && <div>{error}</div>}
+		</>
 	);
 };
 
