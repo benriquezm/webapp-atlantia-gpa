@@ -42,9 +42,6 @@ interface ITableRowContentProps {
 }
 
 const getColor = (isNegative: any, isCustom: any) => {
-	console.log('[isNegative]: ', isNegative);
-	console.log('[isCustom]: ', isCustom);
-
 	let color = '';
 	if (isNegative && isCustom) {
 		color = '#D6215B';

@@ -1,17 +1,8 @@
 import { TableRowContent, TableRowImgContent, TableRowImgWrapper, TableRowStyle } from './styles';
-
-interface IProductProps {
-	id?: number;
-	sku: number;
-	name: string;
-	persistence: number;
-	averagePrice: number;
-	productImage: string;
-	averagePosition: number;
-}
+import { Beer } from '../../../redux/slices/beerProducts/beerProducts.types';
 
 /** TODO separate method toFixed and Match.floor and convert in functions helpers */
-const TableRow = (props: IProductProps) => {
+const TableRow = (props: Beer) => {
 	const { sku, name, persistence, averagePrice, productImage, averagePosition } = props;
 	return (
 		<>
