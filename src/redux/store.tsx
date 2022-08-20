@@ -1,19 +1,14 @@
-// import { applyMiddleware, createStore } from 'redux';
-// import rootReducers from './reducers/rootReducers';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import thunk from 'redux-thunk';
-
-// //  TODO use composeWithDevTools only for instance of deveop
-// const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunk)));
-
-// export default store;
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
 import beerProductsReducer from './slices/beerProducts/beerProducts.slice';
+import priceEvolutionReducer from './slices/priceEvolution/priceEvolution.slice';
+import presenceShareReducer from './slices/presenceShare/presenceShare.slice';
 
 const store = configureStore({
 	reducer: {
 		beerProducts: beerProductsReducer,
+		priceEvolution: priceEvolutionReducer,
+		presenceShare: presenceShareReducer,
 	},
 });
 
