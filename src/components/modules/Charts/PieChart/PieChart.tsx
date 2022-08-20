@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
 
 import { fetchPresenceShare } from '../../../../redux/slices/presenceShare/presenceShare.slice';
 import {
@@ -24,7 +25,7 @@ const PieChart = () => {
 	const series = presenceShare.map((item) => item.presenceShare);
 	const labels = presenceShare.map((item) => item.name);
 	/** end TODO */
-	const options = {
+	const options: ApexOptions = {
 		labels: labels,
 	};
 

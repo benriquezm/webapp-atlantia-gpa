@@ -8,4 +8,5 @@ export const TableBeersStyles = styled.div`
 	height: 1679px;
 	left: 28px;
 	/*top: 700px;*/
+	top: 30px;
 `;
