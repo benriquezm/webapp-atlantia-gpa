@@ -3,10 +3,6 @@ import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 
 import { fetchPresenceShare } from '../../../../redux/slices/presenceShare/presenceShare.slice';
-import {
-	PresenceShare,
-	PresenceShareState,
-} from '../../../../redux/slices/presenceShare/presenceShare.types';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux/redux';
 import { PieChartStyle } from './styles';
 

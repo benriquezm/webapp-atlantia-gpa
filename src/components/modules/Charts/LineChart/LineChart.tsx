@@ -4,6 +4,14 @@ import { ApexOptions } from 'apexcharts';
 
 import { fetchPriceEvolution } from '../../../../redux/slices/priceEvolution/priceEvolution.slice';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux/redux';
+import {
+	getArrKeys,
+	getDate,
+	groupByKey,
+	newArrObj,
+	structureSeries,
+	uniqueArr,
+} from '../../../../utils/lineChart.func';
 import { LineChartStyle } from './styles';
 
 const LineChart = () => {
@@ -13,43 +21,33 @@ const LineChart = () => {
 	const loading = useAppSelector((state) => state.priceEvolution.loading);
 	const evolutionPriceProd = useAppSelector((state) => state.priceEvolution.evolutionPriceProd);
 
-	console.log('[error]: ', error);
-	console.log('[loading]: ', loading);
-	console.log('[evolutionPriceProd]: ', evolutionPriceProd);
+	const productsGroup = groupByKey(evolutionPriceProd, 'sku');
 
-	/** TODO separate function in file helpers for use others components */
-
-	const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
-		list.reduce((previous, currentItem) => {
-			const group = getKey(currentItem);
-			if (!previous[group]) previous[group] = [];
-			previous[group].push(currentItem);
-			return previous;
-		}, {} as Record<K, T[]>);
-
-	const productsGroup = console.log(groupBy(evolutionPriceProd, (i) => i.sku));
+	const arrSKU = getArrKeys(productsGroup);
+	const seriesProducts: { name: string; data: number[] }[] = [];
+	let dates: string[] = [];
+	arrSKU.forEach((sku) => {
+		const arrProducts = newArrObj(productsGroup[sku], 'name', true);
+		const objPrice = structureSeries(
+			newArrObj(productsGroup[sku], 'price', false),
+			arrProducts[0],
+		);
+		seriesProducts.push(objPrice);
+		const arrDates = newArrObj(productsGroup[sku], 'dateExtraction', false);
+		dates.push(...arrDates);
+	});
+	dates = uniqueArr(dates);
+	dates = dates.map((date) => {
+		return getDate(date);
+	});
 
 	useEffect(() => {
 		dispatch(fetchPriceEvolution());
 	}, [dispatch]);
 	/** data for LineChart library apexcharts */
-	const series = [
-		{
-			name: 'Desktops',
-			data: [19, 22, 20, 26],
-		},
-		{
-			name: 'Laptops',
-			data: [10, 12, 40, 36],
-		},
-		{
-			name: 'Tablets',
-			data: [29, 42, 30, 56],
-		},
-	];
 	const options: ApexOptions = {
 		xaxis: {
-			categories: ['2019-05-01', '2019-05-02', '2019-05-03', '2019-05-04'],
+			categories: dates,
 		},
 		stroke: {
 			curve: 'smooth',
@@ -57,9 +55,11 @@ const LineChart = () => {
 	};
 	return (
 		<>
+			{loading && <div>Cargando gráfica ...</div>}
 			<LineChartStyle>
-				<Chart options={options} series={series} type='line' height='100%' />
+				<Chart options={options} series={seriesProducts} type='line' height='100%' />
 			</LineChartStyle>
+			{error !== '' && <div>{error}</div>}
 		</>
 	);
 };
